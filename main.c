@@ -45,8 +45,8 @@ int main(int argc, char *argv[])
 	while(run)
 	{
 		update(&t, &y, &M, &d, &h, &m, &s);
-		
-		if(lastHour != h || lastMinute != m || lastDay != d || lastMonth != M || lastYear != y || lastSecond != s)
+
+		if(lastMinute != m)
 		{
 			somethingChanged(s, m, h, d, M, y);
 
@@ -61,10 +61,16 @@ int main(int argc, char *argv[])
 				onWallpaperChange();
 			}
 
+			lastMinute = m;
+		}
+		
+		if(lastHour != h || lastDay != d || lastMinute != m || lastMonth != M || lastYear != y || lastSecond != s)
+		{
+			somethingChanged(s, m, h, d, M, y);
+
 			printf("%d:%d, %d:%d, wpcooldown: %d\n", h, m, lastHour, lastMinute, wallpaperCooldown);
 
 			lastHour = h;
-			lastMinute = m;
 			lastMonth = M;
 			lastDay = d;
 			lastYear = y;
